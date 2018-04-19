@@ -23,6 +23,11 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Slides
                 </a>
+                
+            <li class="nav-item <?= ($currentPage === 'sucursales') ? 'active' : '' ?>">
+                <a class="nav-link" href="sucursales.php">Sucursales</span></a>
+            </li>
+
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="slides.php">Listado</a>
                     <a class="dropdown-item" href="new/slide.php">Nuevo slider</a>
