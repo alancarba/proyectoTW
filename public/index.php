@@ -8,6 +8,10 @@ $slides = $db->select('slides', [
 ], [
     'ORDER' => ['id' => 'DESC']
 ]);
+
+$nosotros = $db->select('nosotros', '*');
+$promos = $db->select('promos', '*');
+$servicios = $db->select('servicios', '*');
 ?>
 
 <!doctype html>
@@ -63,7 +67,7 @@ $slides = $db->select('slides', [
 
 <main role="main">
     <section class="slider">
-        <?php if(!count($slides)) { ?>
+        <?php if (!count($slides)) { ?>
             <div class="slider__container">
                 <div class="slider__text">
                     <h1>Placeholder de gatitos</h1>
@@ -84,50 +88,48 @@ $slides = $db->select('slides', [
             </div>
         <?php } ?>
     </section>
-    <section id="nosotros">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-9">
-                    <h2>Nosotros</h2>
-                    <h1>CREAMOS<br/>SOLUCIONES</h1>
-                    <h2>a tus necesidades</h2>
-                    <br>
-                    <p>El éxito de un negocio es dar un excelente servicio o producto a todos nuestros clientes. Toda
-                        empresa con éxito va de la mano con una Asesoría Contable, Fiscal y Financiera; es por eso
-                        sometemos a su consideración nuestra propuesta de servicios proponiendo el mejor esquema
-                        diseñado para atender sus necesidades, buscando rentabilidad, legalidad y profesionalismo.</p>
-                    <p>Nuestro equipo de trabajo reúne el conocimiento y la experiencia de varios años de trabajo en
-                        diversas empresas que nos han permitido unir esfuerzos y desarrollar los esquemas de control
-                        contable, fiscal y legal que harán más eficiente a su empresa.
-                    </p>
+    <section class="slider">
+
+        <?php foreach ($nosotros as $nosotro) { ?>
+            <div class="slider__container">
+                <div class="slider__text">
+                    <div class="col-sm-9">
+                        <h1><?= $nosotro['titulo_nosotrs'] ?></h1>
+                        <h3><?= $nosotro['subtitulo_nosotrs'] ?></h3>
+                        <p><?= $nosotro['texto_nosotrs'] ?></p>
+                    </div>
+                    <div class="slider__background"
+                         style="background-image: url(admin/img/subida/<?= $nosotro['imagen_nosotrs'] ?>);"></div>
                 </div>
             </div>
-        </div>
+
+        <?php } ?>
+
     </section>
-    <section class="counter">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 counter__container">
-                    <div class="counter__item">
-                        <h1>1</h1>
-                        <p>Ciudades</p>
-                    </div>
-                    <div class="counter__item">
-                        <h1>1</h1>
-                        <p>Años de experiencia</p>
-                    </div>
-                    <div class="counter__item">
-                        <h1>1</h1>
-                        <p>Clientes Satisfechos</p>
-                    </div>
-                    <div class="counter__item">
-                        <h1>1</h1>
-                        <p>Servicios</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="contenedorHistorial">
+    <?php foreach ($servicios as $servicio) { ?>
+          <div class="container">
+      <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link " href="#"><h1 class="text-center"><?= $servicio['suc_ser'] ?></h1><br/>
+              <p>Sucursales</p></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h1 class="text-center"><?= $servicio['exp_ser'] ?></h1><br/>
+              <p>Años de experiencia</p></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h1 class="text-center"><?= $servicio['cl_ser'] ?></h1><br/>
+              <p>Clientes Satisfechos</p></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#"><h1 class="text-center"><?= $servicio['emp_ser'] ?></h1><br/>
+              <p>Empleados de TS</p></a>
+          </li>
+      </ul>
+    </div>
+    <?php } ?>
+  </section>
     <section class="services bottom-space">
         <div class="container">
             <h1 class="vertical-space text-center font-weight-normal">NUESTROS SERVICIOS</h1>
@@ -171,13 +173,17 @@ $slides = $db->select('slides', [
             </div>
         </div>
     </section>
-    <section class="app-login d-flex justify-content-around">
-        <div class="app-login__inner d-flex flex-column align-content-center align-items-center justify-content-center text-center">
-            <h1>CONÉCTATE A NUESTRA ACCOUNTING APP</h1>
-            <h4>Ingresa a nuestra aplicación para obtener tu documentación</h4>
-            <a href="#" class="btn btn-warning">VER MÁS</a>
-        </div>
+    <?php foreach ($promos as $promo) { ?>
+    <section id="contenedorAPP" class="app-login d-flex justify-content-around ca" style="background-image: url(admin/img/subida/<?= $promo['imagen_pro'] ?>);">
+              <div >
+                <div >
+                    <div class="col-sm-12">
+                        <h1 class="ram1"><?= $promo['titulo_pro'] ?></h1>
+                        <h4 class="ram4"><?= $promo['descripcion_pro'] ?></h4>
+                        <a href="<?= $promo['link_pro'] ?>" class="btn btn-warning">VER MÁS</a>
+                    </div> </div></div>
     </section>
+    <?php } ?>
     <section class="phones">
         <div class="container">
             <div class="row">
